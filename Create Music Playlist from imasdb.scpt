@@ -97,6 +97,12 @@ tell application "Safari"
 		if isValidURL(theURL) of me then
 			set theEvent to setListFromURL(theURL) of me
 			set theMissings to createPlayList(theEvent) of me
+
+			if theMissings is {} then
+				display alert theEvent's title & " is created"
+			else
+				display alert theEvent's title & " is created, but can't find following sons:" & return & return & join(theMissings, return) of me
+			end if
 		else
 			display alert "You should run under imas-db.jp." & return & return & theURL & " isn't supported."
 		end if
@@ -114,6 +120,14 @@ on split(theText, aDelimiter)
 	set AppleScript's text item delimiters to tmp
 	return theList
 end split
+
+on join(theList, theDelimiter)
+	set theBackup to AppleScript's text item delimiters
+	set AppleScript's text item delimiters to theDelimiter
+	set theString to theList as string
+	set AppleScript's text item delimiters to theBackup
+	return theString
+end join
 
 -- https://qiita.com/szk-3/items/4f63358eca91122993e2
 on regexReplace(aText as text, pattern as text, replacement as text)
