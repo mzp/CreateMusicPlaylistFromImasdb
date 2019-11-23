@@ -42,7 +42,7 @@ on addTrack(aSong, aPlaylist)
 			set found to 1
 		else
 			-- if not found, try to searh with edit distance
-			repeat with aTrack in (every file track of playlist 1 whose album contains "CINDERELLA" or album artist contains "CINDERELLA" or artist contains "CINDERELLA" or name contains "M@STER VERSION")
+			repeat with aTrack in (every file track of playlist 1 whose album contains "THE IDOLM@STER" or album artist contains "THE IDOLM@STER" or artist contains "THE IDOLM@STER" or name contains "M@STER VERSION")
 				log aSong & " compare with " & aTrack's name
 				set aDistance to levenshteinDistance(aSong, normalize(aTrack's name) of me) of me
 				set aRatio to aDistance / (length of aSong)
